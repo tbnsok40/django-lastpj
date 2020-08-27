@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+</head>
+
+<body>
+    <div class="container">
+        {% for i in index.all %}
+
+        <div class="postit">
+            <h3>{{ i.title }}</h3> <br>
+            {{ i.pub_date}} <br>
+            {{ i.content}}
+            <div class="postit_icons">
+                <a href="{% url 'detail' i.id %}">📑</a>
+                <a href="{% url 'delete' i.id%}">❌</a>
+                <!-- <a href="{% url 'edit' i.id%}">🎈</a> -->
+
+                <!-- when using modelform -->
+                <a href="{% url 'update' i.id%}">🎈</a>
+            </div>
+
+        </div>
+
+        {% endfor %}
+        <nav>
+            <!-- <a href="{% url 'new' %}">new</a> -->
+            <a href="{% url 'memoform' %}">new</a>
+
+            <img src="{% static 'django.jpg' %}" alt="">
+
+            <!-- modelform사용하려면 여기 url도 new에서 memoform으로 바꿔줘야함 -->
+
+        </nav>
+
+
+        <!-- 가상환경 deactivate해놓지 않아서, 다른 파일의 장고랑 연동돼서 안깔렸던것 -->
+    </div>
+    <!-- <div class='nav'>
+        <a href="{% url 'new' %}">new</a>
+    </div> -->
+
+</body>
+
+</html>
+<!-- 지금 저 포맷에서 날짜별로 옮길 수 있게 해보기
+투두리스트 지우는게 아니라 했다고 표시를 하면, 좋지 않을까? -->

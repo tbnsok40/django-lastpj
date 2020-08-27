@@ -1,0 +1,45 @@
+body{
+    font: 30px;
+    margin: 7px;
+
+}
+a{
+    text-decoration: none;
+}
+.container{
+    display: grid;
+    grid-template-columns: 280px 280px 280px;
+    grid-template-rows: 430px 430px ;
+    position: absolute;
+    /* flex-wrap: wrap; */
+
+}
+.postit{
+    margin-bottom: 7px;
+    margin-left: 7px;
+
+    padding-top:20px;
+    text-align:center;
+    width: 270px;
+    height: 400px;
+    background-color: green;
+    
+    position: relative;
+
+}
+.postit_icons{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+}
+nav{
+width: 100px;
+height: 50px;
+text-align:center;
+background-color: greenyellow;
+}
+/* .postit{
+width: 200px;   
+height: 300px;
+background: gray;
+} */

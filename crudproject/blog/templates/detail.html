@@ -1,0 +1,7 @@
+<h1>{{context.title}}</h1>
+<p>{{context.content}}</p>
+<p>{{context.pub_date}}</p>
+<a href="{% url 'delete' context.id%}">❌</a>
+<!-- <a href="{% url 'edit' context.id%}">🎈</a> -->
+<a href="{% url 'update' context.id%}">🎈</a>
+<a href="{% url 'index' %}">🏠</a>

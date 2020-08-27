@@ -1,0 +1,30 @@
+<!-- <div class="container">
+    {# <form action="{% url 'update' memo.id %}"> #}
+        <h5>제목:</h5>
+        <input type="text" name='title' value='{{memo.title}}'>
+
+        <h4>본문: </h4>
+        <textarea cols=40 rows=10 name="content">{{memo.content}}</textarea> -->
+<!-- 제목처럼 input태그를 사용하여 비슷한 형식으로 만들 수 있지만,
+        textarea를 써서 입력 창을 크게 키워준다. -->
+<!-- <br>
+        <br>
+        <input type="submit" value="제출하기">
+    </form>
+</div> -->
+
+<form method='POST'>
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    <!-- 모델폼을 불러오는 두가지 방식 -->
+
+    <table>
+        <h2>{{form.title.label}}</h2>{{form.title}}
+        <h3>{{form.content.label}}</h3>
+        {{form.content}}
+    </table>
+    <br>
+    <input type="submit" value="제출하기">
+</form>
