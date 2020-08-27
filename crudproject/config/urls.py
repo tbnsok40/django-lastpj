@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from blog.views import new, index, create, detail, delete, edit, update, memoform
+# from account import views # 새로운 앱이 생겼으니 그 안의 views.py도 여기서 관리 해야겠죠?
+from accounts.views import signup, login 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +30,8 @@ urlpatterns = [
     # path('memo/update/<int:memo_id>/', update, name = 'update'),        
     path('memo/update/<int:post_id>/', update, name = 'update'),     
     path('memoform/', memoform, name = 'memoform'),
-    path('accounts/', include('accounts.urls')),
+
+    path('signup/', signup, name='signup'),
+	path('login/', login, name='login'),
 ] 
 

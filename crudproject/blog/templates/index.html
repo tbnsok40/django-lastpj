@@ -34,14 +34,18 @@
         <nav>
             <!-- <a href="{% url 'new' %}">new</a> -->
             <a href="{% url 'memoform' %}">new</a>
+            <br>
 
+            <a href="{% url 'login' %}">log in</a>
             <img src="{% static 'django.jpg' %}" alt="">
 
             <!-- modelform사용하려면 여기 url도 new에서 memoform으로 바꿔줘야함 -->
 
         </nav>
 
-
+        <a href="{% url 'signup' %}">sign up</a>
+        <!-- 복습자료 오타 -->
+        <br>
         <!-- 가상환경 deactivate해놓지 않아서, 다른 파일의 장고랑 연동돼서 안깔렸던것 -->
     </div>
     <!-- <div class='nav'>
