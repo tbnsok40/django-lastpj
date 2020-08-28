@@ -57,8 +57,9 @@ def edit(request, memo_id): # 복습자료에는 ,memo_id 없었음
 #     return redirect('/memo/'+ str(memo.id))
 
 # modelform을 이용한 update
-def update(request, post_id):
-	memo = get_object_or_404(Memo, pk = post_id)
+def update(request, memo_id):
+	memo = get_object_or_404(Memo, pk = memo_id)
+
 	if request.method == 'POST':
 		form = MemoForm(request.POST, instance=memo)
 		if form.is_valid():
@@ -69,4 +70,20 @@ def update(request, post_id):
 		form = MemoForm(instance=memo) # memo 객체에 이미 저장돼있는 것들을 form에 띄워줍니다. 
 		return render(request, 'edit.html', {'form': form})
 
+def comment_create(request,memo_id):
+    if request.method == "POST":
+        temp_form = CommentForms(request.POST)
+        if temp_form.is_valid():
+            clean_form = temp_form.save(commit=False)
+        
+            clean_form.author = User.objects.get(id = request.user.id)
+            clean_form.post = Post.objects.get(id=memo_id)
+            clean_form.save()
+            return redirect('detail', memo_id)
+    
+    
+def comment_delete(request,memo_id, com_id):
+    del_com = Comment.objects.get(id = com_id)
+    del_com.delete()
 
+    return redirect('detail', post_id)

@@ -1,0 +1,17 @@
+{% if error %}
+<!--에러가 나면 에러를 출력해 준다는 간단한 문구입니다. 이따가 views.py에서 에러도 구현할 거에요! -->
+{{ error }}
+{% endif %}
+
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %}
+    <h1>로그인 페이지 입니다.</h1>
+    <label for="inputEmail">이메일</label>
+    <input type="email" id="inputEmail" name="username" placeholder="이메일을 입력해주세요.">
+    <br>
+    <label for="inputPassword">비밀번호</label>
+    <input type="password" id="inputPassword" name="password" placeholder="비밀번호를 입력해주세요">
+    <br>
+
+    <input type="submit" value="로그인하기">
+</form>
