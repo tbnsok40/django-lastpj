@@ -18,14 +18,18 @@
         <div class="postit">
             <h3>{{ i.title }}</h3> <br>
             {{ i.pub_date}} <br>
+            {{i.today}} <br>
             {{ i.content}}
             <div class="postit_icons">
+
                 <a href="{% url 'detail' i.id %}">📑</a>
+                {% if user.is_authenticated %}
                 <a href="{% url 'delete' i.id%}">❌</a>
                 <!-- <a href="{% url 'edit' i.id%}">🎈</a> -->
 
                 <!-- when using modelform -->
                 <a href="{% url 'update' i.id%}">🎈</a>
+                {% endif %}
             </div>
 
         </div>
@@ -36,15 +40,19 @@
             <a href="{% url 'memoform' %}">new</a>
             <br>
 
-            <a href="{% url 'login' %}">log in</a>
+
             <img src="{% static 'django.jpg' %}" alt="">
 
             <!-- modelform사용하려면 여기 url도 new에서 memoform으로 바꿔줘야함 -->
 
         </nav>
-
+        <a href="{% url 'login' %}">log in</a>
         <a href="{% url 'signup' %}">sign up</a>
+
+        {{user}}
         <!-- 복습자료 오타 -->
+
+
         <br>
         <!-- 가상환경 deactivate해놓지 않아서, 다른 파일의 장고랑 연동돼서 안깔렸던것 -->
     </div>
