@@ -48,10 +48,10 @@
         </nav>
         <a href="{% url 'login' %}">log in</a>
         <a href="{% url 'signup' %}">sign up</a>
-
-        {{user}}
+        {% if user.is_authenticated %}
+        {{user.username}}
         <!-- 복습자료 오타 -->
-
+        {% endif %}
 
         <br>
         <!-- 가상환경 deactivate해놓지 않아서, 다른 파일의 장고랑 연동돼서 안깔렸던것 -->

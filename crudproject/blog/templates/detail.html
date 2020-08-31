@@ -5,14 +5,15 @@
 <!-- <a href="{% url 'edit' context.id%}">🎈</a> -->
 <a href="{% url 'update' context.id%}">🎈</a>
 <a href="{% url 'index' %}">🏠</a>
+{% if scrap %}
+<a href="{% url 'scrap' context.id %}">스크랩 취소</a>
+{% else %}
+<a href="{% url 'scrap' context.id %}">스크랩</a>
+{% endif %}
 
 
 <form method="POST" action="{% url 'comment_create' context.id %}">
     {% csrf_token %}
-    {{form.as_p}}
+    {{comment_form.as_p}}
     <button type="submit">작성</button>
 </form>
-
-{%for com in comment_all%}
-{{com.body}}(by {{com.author}}) ---- <a href="{% url 'comment_delete' detail_post.id com.id %}">X</a>
-{%endfor%}

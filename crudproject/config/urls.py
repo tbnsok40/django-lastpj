@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from blog.views import new, index, create, detail, delete, edit, update, memoform, comment_create, comment_delete
+from blog.views import new, index, create, detail, delete, edit, update, memoform, comment_create, comment_delete, scrap
 
 import accounts.views
 
@@ -34,6 +34,8 @@ urlpatterns = [
     path('comment_create/<int:memo_id>',comment_create, name="comment_create" ),
     path('comment_delete/<int:post_id>/<int:com_id>', comment_delete, name="comment_delete"),
     path('accounts/', include('accounts.urls')),
+    
+    path('scrap/<int:memo_id>', scrap, name='scrap'),
 
     path('accountss/', include('allauth.urls'))
 ] 

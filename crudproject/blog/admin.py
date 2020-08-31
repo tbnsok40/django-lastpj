@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Memo,Comment
+from .models import Memo,Comment,Scrap
 # Register your models here.
 admin.site.register(Memo)
 admin.site.register(Comment)
+admin.site.register(Scrap)

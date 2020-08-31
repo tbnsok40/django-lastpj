@@ -1,7 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Memo
+from .models import Memo,Comment, Scrap
 from django.utils import timezone 
-from .forms import MemoForm
+from .forms import MemoForm, CommentForms
+from django.shortcuts import HttpResponseRedirect
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
+
 
 def index(request):
     index = Memo.objects
@@ -34,8 +39,16 @@ def memoform(request):
 
 # Read
 def detail(request, memo_id):
+    context_b = dict()
     context = get_object_or_404(Memo, pk = memo_id)
-    return render(request, 'detail.html', {'context' : context})
+    context_b['context'] = context
+    # scrap = Scrap.objects.filter(user = request.user, memo = memo)
+    context_b['comment_form'] = CommentForms()
+    context_b['comment_all'] = Comment.objects.filter(post = Memo.objects.get(id=memo_id))
+    memo = get_object_or_404(Memo, pk=memo_id)
+    scrap = Scrap.objects.filter(user=request.user, memo=memo) # 현재 로그인 한 유저가 이 글을 스크랩 했는지 변수로 저장합니다. 
+
+    return render(request, 'detail.html', context_b)
 
 # Delete
 def delete(request, memo_id):
@@ -77,7 +90,7 @@ def comment_create(request,memo_id):
             clean_form = temp_form.save(commit=False)
         
             clean_form.author = User.objects.get(id = request.user.id)
-            clean_form.post = Post.objects.get(id=memo_id)
+            clean_form.post = Memo.objects.get(id=memo_id)
             clean_form.save()
             return redirect('detail', memo_id)
     
@@ -87,3 +100,13 @@ def comment_delete(request,memo_id, com_id):
     del_com.delete()
 
     return redirect('detail', post_id)
+
+
+def scrap(request, memo_id):
+    memo = get_object_or_404(Memo, pk = memo_id)
+    scrap = Scrap.objects.create(user = request.user, memo=memo)
+    if not scrapped:
+        Scrap.objects.create(user = request.user, memo = memo)
+    else:
+        scrapped.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER','/'))
